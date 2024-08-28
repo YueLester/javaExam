@@ -33,6 +33,7 @@ public class Main {
             }
             // 还要再进去
             stack.push(n);
+            set.add(n);
         }
         while (!stack.isEmpty()) {
             res.add(stack.poll());
