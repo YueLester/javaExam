@@ -1,19 +1,37 @@
 package second;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class second {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.print("Hello and welcome!");
-        Map<String, String> map = new HashMap<>();
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-            map.put("key" + i, "value" + i);
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        int[] help = new int[n];
+        Arrays.fill(help, -1);
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            arr[i] = in.nextInt();
+            if (map.containsKey(arr[i])) {
+                help[map.get(arr[i])] = i;
+                map.remove(arr[i]);
+            } else {
+                map.put(arr[i], i);
+            }
+        }
+
+
+        // 开始决定每一位的留不留
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (help[i] != -1) {
+                // 坐标有1的偏移
+                res.add(i + 1);
+                res.add(help[i] + 1);
+            }
+        }
+        for (int i = 0; i < res.size(); i++ ){
+            System.out.print(res.get(i) + " ");
         }
     }
 }
